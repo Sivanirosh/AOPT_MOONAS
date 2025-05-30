@@ -1,0 +1,31 @@
+seed: 42
+
+data:
+  train:
+    batch_size: 128
+  val:
+    batch_size: 256
+
+model:
+  supernet:
+    C: 16
+    num_cells: 4
+    num_nodes: 4
+    num_ops: 6
+    dropout_p: 0.2
+  hypernet:
+    hidden_dim: 128
+    depth: 3
+
+optimizer:
+  weight:
+    lr: 0.025
+    momentum: 0.9
+  arch:
+    lr: 0.01
+    momentum: 0.9
+
+search:
+  strategy: random
+  alpha: [1.0, 0.1]
+  num_samples: 30

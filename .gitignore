@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+venv/
+.env/
+
+# Logs & checkpoints
+*.log
+checkpoints/
+
+# Data & models
+# Ignore all CIFAR raw files
+data/cifar-10-batches-py/
+data/cifar-10-python.tar.gz
+notebooks/data/cifar-10-batches-py/
+notebooks/data/cifar-10-python.tar.gz
+*.pt
+*.pth
+*.pkl
+
+# IDE files
+.vscode/
+.idea/
+
