@@ -12,30 +12,59 @@ Once Pareto‐optimal architectures are found, the code also supports retraining
 
 ## Table of Contents
 
-1. [Installation](#installation)
-2. [Repository Structure](#repository-structure)
-3. [Configuration Files](#configuration-files)
-4. [Usage](#usage)
-
+1. [Example Outputs and Analysis](#Example-Analysis)
+2. [Installation](#installation)
+3. [Repository Structure](#repository-structure)
+4. [Configuration Files](#configuration-files)
+5. [Usage](#usage)
    * [Training a Supernet (Search Phase)](#training-a-supernet-search-phase)
    * [Evaluating & Retrieving Pareto Fronts](#evaluating--retrieving-pareto-fronts)
    * [Retraining Selected Architectures](#retraining-selected-architectures)
    * [Visualizing Sample Predictions](#visualizing-sample-predictions)
-5. [Example Commands](#example-commands)
-6. [Dependencies](#dependencies)
-7. [Contact & License](#contact--license)
+6. [Example Commands](#example-commands)
+7. [Dependencies](#dependencies)
+8. [Contact](#contact)
 
 ---
 
-## Example Outputs
+## Example Outputs and Analysis
+
+This section illustrates the effectiveness of Multi-Objective Neural Architecture Search (MODNAS) strategies in balancing two critical objectives: **Classification Accuracy** and **Model Size**. We compare three approaches:
+
+* **MGDA** (Multi-Gradient Descent Algorithm)
+* **NSGA-II** (Non-dominated Sorting Genetic Algorithm II)
+* **Random Search** (baseline)
+
+---
 
 ### Approximated Pareto Fronts
 
+The following plot presents architectures discovered by each strategy. Points indicate sampled architectures, while dashed lines outline the approximated Pareto front—the best accuracy-size tradeoffs found by each method.
+
 ![Approximated Pareto](eval_results/plots/approximated_pareto.png)
+
+**Key Observations**:
+
+* **MGDA** (red) identifies compact architectures efficiently, producing a dense Pareto front in the low-size range.
+* **NSGA-II** (green) explores intermediate-sized models, achieving strong accuracy-size tradeoffs.
+* **Random Search** (blue) samples predominantly larger architectures, often less efficient in accuracy vs. size.
+
+---
 
 ### True Pareto Front (after retraining)
 
+
+The architectures identified in the previous step were retrained independently from scratch. This provides an unbiased evaluation of their true performance, resulting in the **True Pareto Front**:
+
 ![True Pareto Front](eval_results/plots/true_pareto.png)
+
+**Key Observations**:
+
+* **MGDA** continues to offer superior efficiency, maintaining high accuracy at significantly smaller sizes.
+* **NSGA-II** retains dominance in the mid-sized architectures, providing an excellent balance of accuracy and size.
+* **Random Search**, while occasionally achieving high accuracy, still results in larger, less practical models.
+
+---
 
 ### Qualitative Visualization of Best Architectures
 
@@ -47,6 +76,41 @@ Once Pareto‐optimal architectures are found, the code also supports retraining
 
 #### Random Search Best Architecture
 ![Random Best Visualization](eval_results/plots/random_best_vis.png)
+
+* Correct predictions are indicated in green, incorrect predictions in red.
+* All strategies yield strong predictive performance, but MGDA and NSGA-II architectures achieve similar accuracy with significantly smaller and more efficient models compared to Random Search.
+
+---
+
+Here's an enhanced and structured **Summary** section incorporating your suggestions clearly and succinctly:
+
+---
+
+### Summary and Analysis
+
+#### Advantages
+
+* **MGDA and NSGA-II** demonstrate substantial advantages over Random Search by explicitly balancing model complexity (size) and accuracy, offering architectures better suited for resource-constrained environments.
+* **MGDA**, in particular, explores a more desirable region, consistently producing highly accurate yet compact architectures compared to other strategies.
+* Independent retraining validates that the architectures discovered through **MGDA** and **NSGA-II** methods retain their performance, confirming their practical robustness.
+
+#### Limitations and Considerations
+
+* **Supernet Weight-Sharing Bias**:
+  Supernet training can introduce biases due to shared weights, causing the accuracy and model size estimations from the supernet stage to deviate when architectures are trained independently. This phenomenon can slightly shift performance between approximation and retraining phases.
+
+* **MGDA Common Pitfalls**:
+  While effective, MGDA relies on gradient-based optimization, which can occasionally converge to local Pareto-optimal solutions or become unstable if gradients of multiple objectives conflict strongly.
+
+* **Computational Costs**:
+  Multi-objective optimization methods, especially NSGA-II, typically require higher computational overhead due to population maintenance and evaluations compared to simpler methods like Random Search.
+
+---
+
+### Concluding Remarks
+
+These results highlight the effectiveness of principled Multi-Objective Neural Architecture Search approaches (**MGDA**, **NSGA-II**) in discovering architectures that achieve excellent accuracy-size tradeoffs. Despite certain inherent biases and computational demands, adopting structured, gradient- and population-based strategies proves beneficial, particularly in practical, resource-constrained deployment scenarios.
+
 
 ---
 
@@ -358,7 +422,7 @@ pip install -r requirements.txt
 
 ---
 
-## Contact & License
+## Contact
 
 If you encounter any issues or have suggestions, feel free to open an issue on the GitHub repository:
 [https://github.com/Sivanirosh/AOPT\_MOONAS](https://github.com/Sivanirosh/AOPT_MOONAS)
