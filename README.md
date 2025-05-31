@@ -31,22 +31,22 @@ Once Pareto‐optimal architectures are found, the code also supports retraining
 
 ### Approximated Pareto Fronts
 
-![Approximated Pareto](plots/approximated_pareto.png)
+![Approximated Pareto](eval_results/plots/approximated_pareto.png)
 
 ### True Pareto Front (after retraining)
 
-![True Pareto Front](plots/true_pareto.png)
+![True Pareto Front](eval_results/plots/true_pareto.png)
 
 ### Qualitative Visualization of Best Architectures
 
 #### MGDA Best Architecture
-![MGDA Best Visualization](plots/mgda_best_vis.png)
+![MGDA Best Visualization](eval_results/plots/mgda_best_vis.png)
 
 #### NSGA Best Architecture
-![NSGA Best Visualization](plots/nsga_best_vis.png)
+![NSGA Best Visualization](eval_results/plots/nsga_best_vis.png)
 
 #### Random Search Best Architecture
-![Random Best Visualization](plots/random_best_vis.png)
+![Random Best Visualization](eval_results/plots/random_best_vis.png)
 
 ---
 
